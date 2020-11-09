@@ -1,4 +1,4 @@
-*.json
-*.tfvars
-*.terraform
-*.tfstate*
+terraform/*.json
+terraform/*.tfvars
+terraform/*.terraform
+terraform/*.tfstate*
