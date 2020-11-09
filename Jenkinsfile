@@ -31,6 +31,8 @@ pipeline {
 }
 
 def getVersion(){
-    git rev-parse --verify --short HEAD
-    return imgVersion 
+    steps{
+        sh 'git rev-parse --verify --short HEAD'
+        return imgVersion 
+    }
 }
