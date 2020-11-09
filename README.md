@@ -1,2 +1,2 @@
-# cicdpythonapp-k8s
+# cicdsamp-k8s
 Deploying sample Java app to k8s using Jenkins CICD
