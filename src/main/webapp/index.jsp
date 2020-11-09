@@ -1,5 +1,6 @@
 <html>
 <body>
-<h2 stype="colour: red">Deployed using Jenkins!!/h2>
+<h2 stype="colour:red">Deployed using Jenkins CI/Cd Pipeline!!</h2>
 </body>
 </html>
+
