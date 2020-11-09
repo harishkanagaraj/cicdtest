@@ -1,13 +1,16 @@
-pipeline{
+pipeline {
     agent any
     stages{
         stage("Git clone"){
-            git 'https://github.com/sathishkumarusk/cicdpythonapp-k8s.git' 
+             steps {
+                 git 'https://github.com/sathishkumarusk/cicdpythonapp-k8s.git' 
+             }
         }
         stage("Build Mvn package"){
-            sh 'echo building'
-            sh 'mvn clean package'
-            
+            steps{
+                sh 'echo building'
+                sh 'mvn clean package'
+            }
         }
     }
 }
