@@ -19,9 +19,10 @@ pipeline {
             }
     
         }
-        stage("run docker")
+        stage("run docker"){
             steps{
                 sh 'docker run -d -p 80:8080 webapp:latest'
             }
+        }
     }
 }
