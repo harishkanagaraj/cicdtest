@@ -12,5 +12,11 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+        stage("Build Docker image"){
+            steps{
+                sh 'docker build . -t webapp:latest'
+            }
+        }
+
     }
 }
