@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-         DOCKER_VERSION = "imgVersion"
+         DOCKER_VERSION = getVersion()
         }
 
     stages{
