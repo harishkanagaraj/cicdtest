@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: myappsts
+  labels: 
+     for: web
+spec:
+   template:
+    metadata:
+      name: webapp
+      labels:
+        for: webapp
+    spec:
+       containers:
+        - name: nginxcon
+          image: nginx
+          volumeMounts:
+           - mountPath: /var/logs
+             name: mypvc
+       volumes:
+         - name: mypvc
+           persistentVolumeClaim:
+              claimName: webpvc
+   replicas: 3
+   selector:
+      matchLabels:
+        for: webapp
+            
+   serviceName: stsservice
