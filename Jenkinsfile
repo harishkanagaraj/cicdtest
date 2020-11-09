@@ -31,6 +31,6 @@ pipeline {
 }
 
 def getVersion(){    
-        sh 'git rev-parse --verify --short HEAD'
+        def imgVersion = sh returnStdout: true, script: 'git rev-parse --verify --short HEAD'
         return imgVersion 
 }
