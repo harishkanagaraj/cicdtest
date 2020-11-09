@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+         DOCKER_VERSION = "imgVersion"
+        }
+
     stages{
         stage("Git clone"){
              steps {
@@ -14,15 +18,19 @@ pipeline {
         }
         stage("Build Docker image"){
             steps{
-                sh 'pwd'
-                sh 'docker build . -t webapp:latest'
+                sh 'docker build . -t webapp:${DOCKER_VERSION}'
             }
     
         }
         stage("run docker"){
             steps{
-                sh 'docker run -d -p 80:8080 webapp:latest'
+                sh 'docker run -d -p 80:8080 webapp:${DOCKER_VERSION}'
             }
         }
     }
+}
+
+def getVersion(){
+    git rev-parse --verify --short HEAD
+    return imgVersion 
 }
