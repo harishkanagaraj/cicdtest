@@ -5,5 +5,5 @@ variable "subnet" {
 
 variable "username" {
 }
-variable "password" {
+variable "passwd" {
 }

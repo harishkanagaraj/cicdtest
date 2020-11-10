@@ -1,0 +1,28 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: jenkins-deploy
+  namespace: jenkinscicd
+
+subjects:
+  - kind: ServiceAccount
+    apiGroup: ""
+    name: cd-jenkins
+
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: jenkins-cl
+
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: RoleBinding
+# metadata:
+#   name: jenkins-deploy
+# subjects:
+#   - kind: ServiceAccount
+#     name: default:cd-jenkins
+#     apiGroup: rbac.authorizaion.k8s.io
+# roleRef:
+#     kind: ClusterRole
+#     name: cluster-admin
+#     apiGroup: rbac.authorization.k8s.io
