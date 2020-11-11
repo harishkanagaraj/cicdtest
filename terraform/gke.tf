@@ -14,6 +14,8 @@ resource "google_compute_subnetwork" "gkesubnet" {
   
 }
 
+
+
 resource "google_container_cluster" "one" {
     name = "terrafrom-test-1"
     location = "us-west2"
@@ -35,3 +37,11 @@ resource "google_container_cluster" "one" {
     }
 }
 }
+
+module "iam" {
+    source = "./modules/iam"
+    
+}
+
+
+
