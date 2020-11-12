@@ -1,5 +1,7 @@
 
 
+
+# Custom role to provide SA to get cluster details  
 resource "google_project_iam_custom_role" "gke-deployer" {
   role_id     = "gke_deploye"
   title       = "Minimal IAM role for GKE access"
@@ -17,13 +19,14 @@ resource "google_project_iam_custom_role" "gke-deployer" {
   ]
 }
 
-
+#SA to access the GKE Cluster
 resource "google_service_account" "jenkins-gke-deployer" {
   account_id   = var.sa_name
   display_name = var.sa_name
 }
 
 
+#IAM role Binding with Role - SA
 resource "google_project_iam_member" "jenkins-deployer-gke-access" {
   project = var.project
   role    = "projects/${var.project}/roles/${google_project_iam_custom_role.gke-deployer.role_id}"

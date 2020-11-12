@@ -1,8 +1,21 @@
-apiVersion: rbac.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
-  name: jenkins-cl
+ name: cicd-deployer
 rules:
-  - apiGroups: ["", "apps", "extentions"]
-    resources: ["*"]
-    verbs: ["*"]
+- apiGroups:
+  - extensions
+  - apps
+  - v1
+  resources:
+  - containers
+  - endpoints
+  - services
+  - pods
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
