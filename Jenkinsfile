@@ -32,7 +32,7 @@ pipeline {
         }
         stage ("docker push"){
             steps{
-                sh 'docker push /webapp:${DOCKER_VERSION}'
+                sh 'docker push sathishkumarusk/webapp:${DOCKER_VERSION}'
             }
         }
         
