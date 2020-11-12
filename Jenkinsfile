@@ -25,14 +25,14 @@ pipeline {
         }
         stage("docker login"){
             steps{
-                withCredentials([string(credentialsId: 'passwddocker', variable: 'dockerhubpassword')]) {
-                    sh 'docker login -u sathishkumarusk -p $dockerhubpassword'
-                    }
-                 }
+                withCredentials([usernamePassword(credentialsId: 'dockercred', passwordVariable: 'hub_passwd', usernameVariable: 'hub_username')]) {
+                    sh 'docker login -u $hub_username -p $hub_passwd'
+                }
+                 }  
         }
         stage ("docker push"){
             steps{
-                sh 'docker push sathishkumarusk/webapp:${DOCKER_VERSION}'
+                sh 'docker push /webapp:${DOCKER_VERSION}'
             }
         }
         
