@@ -16,17 +16,24 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+        
         stage("Build Docker image"){
             steps{
-                sh 'docker build . -t webapp:${DOCKER_VERSION}'
+                sh 'docker build . -t sathishkumarusk/webapp:${DOCKER_VERSION}'
             }
     
         }
-        stage("run docker"){
+        stage("docker login"){
+            withCredentials([string(credentialsId: 'passwddocker', variable: 'dockerhubpassword')]) {
+            sh 'docker login -u sathishkumarusk -p ${dockerhubpassword}'
+}
+        }
+        stage ("docker push"){
             steps{
-                sh 'docker run -d -p 80:8080 webapp:${DOCKER_VERSION}'
+                sh 'docker push sathishkumarusk/webapp:${DOCKER_VERSION}'
             }
         }
+        
     }
 }
 
