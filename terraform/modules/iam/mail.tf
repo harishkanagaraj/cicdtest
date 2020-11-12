@@ -16,6 +16,9 @@ resource "google_project_iam_custom_role" "gke-deployer" {
     "container.clusters.getCredentials",
     "container.clusters.list",
     "resourcemanager.projects.get",
+    # "container.services.get",
+    # "container.statefulSets.get",
+
   ]
 }
 
