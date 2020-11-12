@@ -37,13 +37,13 @@ pipeline {
         }
         stage("deploying in to GKE"){
             steps {
-                step($class: 'KubernetesEngineBuilder', 
+                step([$class: 'KubernetesEngineBuilder', 
                         projectId: "swift-hangar-275604",
                         clusterName: "terrafrom-test-1",
                         region: "us-west2",
-                        manifestPattern: 'k8s/',
+                        manifestPattern: 'k8s/dev/',
                         credentialsId: "GCP Compute 101",
-                        verifyDeployments: true]
+                        verifyDeployments: true])
             }
         }
         

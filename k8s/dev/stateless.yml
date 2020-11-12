@@ -14,14 +14,6 @@ spec:
        containers:
         - name: nginxcon
           image: nginx
-          volumeMounts:
-           - mountPath: /var/logs
-             name: mypvc
-       volumes:
-         - name: mypvc
-           persistentVolumeClaim:
-              claimName: webpvc
-   replicas: 3
    selector:
       matchLabels:
         for: webapp
