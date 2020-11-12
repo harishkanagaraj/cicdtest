@@ -1,8 +1,7 @@
 provider "google" {
  credentials = file("gcpsvc.json")
  region = "us-west1" 
- project = "swift-hangar-275604"
-
+ project = var.project
 }
 
 resource "google_compute_subnetwork" "gkesubnet" {
@@ -40,6 +39,8 @@ resource "google_container_cluster" "one" {
 
 module "iam" {
     source = "./modules/iam"
+    project = var.project
+    sa_name = var.sa_name
     
 }
 

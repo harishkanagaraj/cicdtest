@@ -1,36 +1,31 @@
 
 
-resource "google_service_account" "jenkins" {
-    account_id = "cicd-k8s-svc"
-    display_name = "cicd-k8s-svc"
+resource "google_project_iam_custom_role" "gke-deployer" {
+  role_id     = "gke_deployertest"
+  title       = "Minimal IAM role for GKE access"
+  description = "Bare minimum permissions to access the kubernetes API for using the Jenkins GKE plugin."
+  project     = var.project
+
+  permissions = [
+    "compute.zones.list",
+    "container.apiServices.get",
+    "container.apiServices.list",
+    "container.clusters.get",
+    "container.clusters.getCredentials",
+    "container.clusters.list",
+    "resourcemanager.projects.get",
+  ]
 }
 
 
-resource "google_project_iam_custom_role" "cicdjenkins" {
-    role_id = "cicdgkerole"
-    title = "cide-customerle"
-    permissions = ["container.apiServices.get", "container.apiServices.list", 
-                   "container.clusters.get", "container.clusters.getCredentials",
-                   "container.clusters.list", "resourcemanager.projects.get"]
-    
-}
-
-resource "google_service_account_iam_member" "cicdmember" {
-    service_account_id = google_service_account.jenkins.name
-    role = google_project_iam_custom_role.cicdjenkins.id
-    member =  "serviceAccount:${google_service_account.jenkins.email}"
-        
-    
+resource "google_service_account" "jenkins-gke-deployer" {
+  account_id   = var.sa_name
+  display_name = var.sa_name
 }
 
 
-resource "google_service_account_iam_binding" "cicd" {
-    service_account_id = google_service_account.jenkins.name
-    role = google_project_iam_custom_role.cicdjenkins.id
-    members = [
-        "serviceAccount:${google_service_account.jenkins.email}"
-        
-    ]
-
+resource "google_project_iam_member" "jenkins-deployer-gke-access" {
+  project = var.project
+  role    = "projects/${var.project}/roles/${google_project_iam_custom_role.gke-deployer.role_id}"
+  member  = "serviceAccount:${google_service_account.jenkins-gke-deployer.email}"
 }
-
