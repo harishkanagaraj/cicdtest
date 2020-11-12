@@ -1,7 +1,7 @@
 
 
 resource "google_project_iam_custom_role" "gke-deployer" {
-  role_id     = "gke_deployertest"
+  role_id     = "gke_deploye"
   title       = "Minimal IAM role for GKE access"
   description = "Bare minimum permissions to access the kubernetes API for using the Jenkins GKE plugin."
   project     = var.project
@@ -29,3 +29,4 @@ resource "google_project_iam_member" "jenkins-deployer-gke-access" {
   role    = "projects/${var.project}/roles/${google_project_iam_custom_role.gke-deployer.role_id}"
   member  = "serviceAccount:${google_service_account.jenkins-gke-deployer.email}"
 }
+
