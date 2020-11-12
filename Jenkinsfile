@@ -40,7 +40,7 @@ pipeline {
                 step([$class: 'KubernetesEngineBuilder', 
                         projectId: "swift-hangar-275604",
                         clusterName: "terrafrom-test-1",
-                        location: "us-west2"
+                        location: "us-west2",
                         manifestPattern: "k8s/dev/",
                         credentialsId: "GCP Compute 101",
                         verifyDeployments: true])
